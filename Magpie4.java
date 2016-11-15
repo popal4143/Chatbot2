@@ -8,7 +8,7 @@
  *</li></ul>
  * @author Laurie White
  * @version April 2012
- *
+ * ******
  */
 public class Magpie4
 {
