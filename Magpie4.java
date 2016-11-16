@@ -59,23 +59,90 @@ public class Magpie4
         {
             response = transformIWantStatement(statement);
         }
-        
-        else if (findKeyword(statement, "When", 0) >= 0)
+        else if (findKeyword(statement, "Hi", 0) >= 0)
         {
-            int psn = findKeyword(statement, "When", 0);
+            response = "Hi";
+        }
+        else if (findKeyword(statement, "Hello", 0) >= 0)
+        {
+            response = "Hi";
+        }
+        
+        else if (findKeyword(statement, "Should", 0) >= 0)
+        {
+            int psn = findKeyword(statement, "Should", 0);
             
             if (psn >= 0
-                    && findKeyword(statement, "drive", psn) >= 0)
+                    && findKeyword(statement, "AP", psn) >= 0)
             {
-                response = transformYouMeStatement(statement);
+                response = "Be careful, AP classes are very difficult. Only take the class if it’s really something you love to do."+
+                "I would recommend that you visit this website for more information on what classes to take:" +
+                "http:www.studypoint.com/ed/ap-classes/";
             }
             else if (psn >= 0
-                    && findKeyword(statement, "driving", psn) >= 0)
+                    && findKeyword(statement, "sport", psn) >= 0)
             {
-                response = transformISomethingYouStatement(statement);
+                response ="Yes. Sports are great ways to make "+
+                "friends and learn more about yourself. Remember "+
+                "though, sports take a lot of time and " +
+                "dedication so make sure you are serious about it.";
+            }
+            else
+            {
+                response = getRandomResponse();
             }
         }
-   
+        else if (findKeyword(statement, "Could", 0) >= 0)
+        {
+            int psn = findKeyword(statement, "Could", 0);
+            if (psn >= 0
+                    && findKeyword(statement, "Homework", psn) >= 0)
+            {
+                response = "Please visit the HUB and ask a tutor. They’re always available and glad to help. ";
+            }
+            
+            else
+            {
+                response = getRandomResponse();
+            }
+        }
+        else if (findKeyword(statement, "Why", 0) >= 0)
+        {
+            int psn = findKeyword(statement, "Why", 0);
+            if (psn >= 0
+                    && findKeyword(statement, "off-campus", psn) >= 0)
+            {
+                response = "The school would like you to succeed in your first year in high school without distractions." +
+                "That’s why DHS created the Freshman Mentor Program to help you in your first magical year of high school!";
+            }
+            else if (psn >= 0
+                    && findKeyword(statement, "have FMP", psn) >= 0)
+            {
+                response = "Here at Dublin High, we understand that your first year of High School can be scary. That is why we created FMP to ease you into you experience.";
+            }
+            else
+            {
+                response = getRandomResponse();
+            }
+        }
+        else if (findKeyword(statement, "Where", 0) >= 0)
+        {
+            int psn = findKeyword(statement, "Where", 0);
+            if (psn >= 0
+                    && findKeyword(statement, "taco-truck", psn) >= 0)
+            {
+                response = "You are not allowed to go there";
+            }
+            else if (psn >= 0
+                    && findKeyword(statement, "lockers", psn) >= 0)
+            {
+                response ="Here at Dublin High, we do not have traditional lockers. There are, however, PE lockers located in the Old Gym";
+            }
+            else
+            {
+                response = getRandomResponse();
+            }
+        }
         else if (findKeyword(statement, "How", 0) >= 0) //finish responses for these and make sure works
         {
             int psn = findKeyword(statement, "How", 0);
@@ -114,6 +181,12 @@ public class Magpie4
                 {
                     response = getRandomResponse();
                 }
+            }
+            if (psn >= 0
+                    && findKeyword(statement, "make friends", psn) >= 0)
+            {
+                response = "Get out there! Join clubs, join a sport, participate in student activities. Find people that have similar interests as you and just hang out with them.";
+
             }
         }
         
