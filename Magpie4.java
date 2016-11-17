@@ -138,6 +138,11 @@ public class Magpie4
             {
                 response ="Here at Dublin High, we do not have traditional lockers. There are, however, PE lockers located in the Old Gym";
             }
+            else if (psn >= 0
+                    && findKeyword(statement, "building", psn) >= 0)
+            {
+                response ="A map of the school can be found in your Student Planner";
+            }
             else
             {
                 response = getRandomResponse();
@@ -147,6 +152,7 @@ public class Magpie4
         {
             int psn = findKeyword(statement, "How", 0);
             int psn2 = findKeyword(statement, "Where", 0);
+            int psn3 = findKeyword(statement, "find", 0);
             if (psn >= 0
                     && findKeyword(statement, "print", psn) >= 0)
             {
@@ -187,6 +193,10 @@ public class Magpie4
             {
                 response = "Get out there! Join clubs, join a sport, participate in student activities. Find people that have similar interests as you and just hang out with them.";
 
+            }
+            if (psn3>=0 && findKeyword(statement, "activities", psn) >= 0)
+            {
+                response = "Activities are announced during the morning announcements and the Video Bulletin. Make sure to pay attention so you don’t miss anything.";
             }
         }
         
