@@ -67,7 +67,7 @@ public class Magpie4
         {
             response = "Hi";
         }
-        
+        //any questions that start with "should" are here
         else if (findKeyword(statement, "Should", 0) >= 0)
         {
             int psn = findKeyword(statement, "Should", 0);
@@ -92,6 +92,7 @@ public class Magpie4
                 response = getRandomResponse();
             }
         }
+        //Questions with "could" are here
         else if (findKeyword(statement, "Could", 0) >= 0)
         {
             int psn = findKeyword(statement, "Could", 0);
@@ -106,6 +107,7 @@ public class Magpie4
                 response = getRandomResponse();
             }
         }
+        //"Why" questions are here
         else if (findKeyword(statement, "Why", 0) >= 0)
         {
             int psn = findKeyword(statement, "Why", 0);
@@ -125,6 +127,20 @@ public class Magpie4
                 response = getRandomResponse();
             }
         }
+        else if (findKeyword(statement, "What", 0) >= 0)
+        {
+            int psn = findKeyword(statement, "What", 0);
+            if (psn >= 0
+                    && findKeyword(statement, "name", psn) >= 0)
+            {
+                response = "My name is Justin Symmank";
+            }
+            else
+            {
+                response = getRandomResponse();
+            }
+        }
+        //"Where questions are here
         else if (findKeyword(statement, "Where", 0) >= 0)
         {
             int psn = findKeyword(statement, "Where", 0);
@@ -143,11 +159,17 @@ public class Magpie4
             {
                 response ="A map of the school can be found in your Student Planner";
             }
+             else if (psn >= 0
+                    && findKeyword(statement, "lanyard", psn) >= 0)
+            {
+                response ="Make sure to always wear your lanyard! If you do not wear it you may receive a detention. If you lost it, you can order a new one at student activities. ";
+            }
             else
             {
                 response = getRandomResponse();
             }
         }
+        //"How" questions are here
         else if (findKeyword(statement, "How", 0) >= 0) //finish responses for these and make sure works
         {
             int psn = findKeyword(statement, "How", 0);
@@ -191,15 +213,29 @@ public class Magpie4
             if (psn >= 0
                     && findKeyword(statement, "make friends", psn) >= 0)
             {
-                response = "Get out there! Join clubs, join a sport, participate in student activities. Find people that have similar interests as you and just hang out with them.";
-
+                response = "Get out there! Join clubs, join a sport, participate in student activities. Find people that have similar interests as you and just hang out with them.";         
+            }
+            if (psn >= 0
+                    && findKeyword(statement, "college", psn) >= 0)
+            {
+                response = "You're a freshman, stop worrying about college and have fun while you can";         
+            }
+            if (psn >= 0
+                    && findKeyword(statement, "driving", psn) >= 0)
+            {
+                response = "You can take your permit test at fifteen and a half. After that, you need to wait six months and take three behind the wheel lessons to take your driving lesson. But remember, all upperclassmen hate lowerclassmen that can drive.";         
+            }
+            if (psn >= 0
+                    && findKeyword(statement, "drive", psn) >= 0)
+            {
+                response = "You can take your permit test at fifteen and a half. After that, you need to wait six months and take three behind the wheel lessons to take your driving lesson. But remember, all upperclassmen hate lowerclassmen that can drive.";         
             }
             if (psn3>=0 && findKeyword(statement, "activities", psn) >= 0)
             {
                 response = "Activities are announced during the morning announcements and the Video Bulletin. Make sure to pay attention so you don’t miss anything.";
             }
         }
-        
+       //"I __ you" transform statement 
         else
         {
             // Look for a two word (you <something> me)
