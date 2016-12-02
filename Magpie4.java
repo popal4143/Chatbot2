@@ -146,13 +146,13 @@ public class Magpie4
                 "though, sports take a lot of time and \n" +
                 "dedication so make sure you are serious about it.";
             }
-            else if (stringContainsItemFromList(statement, fromList) == true) { 
+            /*else if (stringContainsItemFromList(statement, fromList) == true) { 
                 response = transformStr(statement);
             }   
             else
             {
                 response = getRandomResponse();
-            }
+            }*/
         }
         //Questions with "could" are here
         else if (findKeyword(statement, "Could", 0) >= 0)
@@ -163,13 +163,16 @@ public class Magpie4
             {
                 response = "Please visit the HUB and ask a tutor. They’re always available \nand glad to help. "; //Context Based Response #4
             }
-            else if (stringContainsItemFromList(statement, fromList) == true) { 
+            else if (psn >= 0 && findKeyword(statement, "off campus", psn) >= 0) {
+                response = "No I will not take you off campus, that is against school rules.";
+            }
+            /*else if (stringContainsItemFromList(statement, fromList) == true) { 
                 response = transformStr(statement);
             }   
             else
             {
                 response = getRandomResponse();
-            }
+            }*/
         }
         //"Why" questions are here
         else if (findKeyword(statement, "Why", 0) >= 0)
@@ -186,13 +189,13 @@ public class Magpie4
             {
                 response = "Here at Dublin High, we understand that your first year of High School \ncan be scary. That is why we created FMP to ease you \ninto your experience."; //Context Based Response #6
             }
-            else if (stringContainsItemFromList(statement, fromList) == true) { 
+            /*else if (stringContainsItemFromList(statement, fromList) == true) { 
                 response = transformStr(statement);
             }   
             else
             {
                 response = getRandomResponse();
-            }
+            }*/
         }
         else if (findKeyword(statement, "What", 0) >= 0)
         {
@@ -202,12 +205,23 @@ public class Magpie4
             {
                 response = "My name is Justin Symmank"; //Context Based Response #7
             }
-            else if (stringContainsItemFromList(statement, fromList) == true) { 
+            else if (psn >= 0 && findKeyword(statement, "best class", psn) >= 0) {
+                response = "AP Computer Science is the best class.";
+            }
+            /*else if (stringContainsItemFromList(statement, fromList) == true) { 
                 response = transformStr(statement);
             }   
             else
             {
                 response = getRandomResponse();
+            }*/
+        }
+        else if (findKeyword(statement, "My name", 0) >= 0)
+        {
+            int psn = findKeyword(statement, "my name", 0);
+            if (psn >= 0)
+            {
+                response = "That's a nice name, I'll try to remember it. My name is Justin Symmank.";
             }
         }
         //"Where questions are here
@@ -234,13 +248,23 @@ public class Magpie4
             {
                 response ="Make sure to always wear your lanyard! If you do not wear \nit you may receive a detention. If you lost it, you can order a \nnew one at student activities. "; //Context Based Response #11
             }
-            else if (stringContainsItemFromList(statement, fromList) == true) { 
+            else if (psn >= 0
+                    && findKeyword(statement, "cafeteria", psn) >= 0)
+            {
+                response ="At Dublin High, we call the cafeteria the Student Union. \nIt is in the center of campus."; //Context Based Response #9
+            }
+            else if (psn >= 0
+                    && findKeyword(statement, "class", psn) >= 0)
+            {
+                response ="A map of the school can be found in your Student Planner. \nIf you don't know your what classroom your class is in, it can be \nfound online on the parent portal."; //Context Based Response #10
+            }
+            /*else if (stringContainsItemFromList(statement, fromList) == true) { 
                 response = transformStr(statement);
             }   
             else
             {
                 response = getRandomResponse();
-            }
+            }*/
         }
         //"How" questions are here
         else if (findKeyword(statement, "How", 0) >= 0) 
@@ -278,13 +302,13 @@ public class Magpie4
                     + "https://sites.google.com/a/dublinusd.org/the-dhs-hub/ \n"
                     + "You can also find out more about the Dublin High School HUB on this website.";
                 }
-                else if (stringContainsItemFromList(statement, fromList) == true) { 
-                response = transformStr(statement);
+                /*else if (stringContainsItemFromList(statement, fromList) == true) { 
+                 response = transformStr(statement);
                 }   
                 else 
                 {
                     response = getRandomResponse();
-                }
+                }*/
             }
             if (psn >= 0
                     && findKeyword(statement, "make friends", psn) >= 0)
@@ -312,7 +336,7 @@ public class Magpie4
             }
         }
        //Transposition Statements
-        else
+        else if (findKeyword(statement, "you", 0) >= 0 || findKeyword(statement, "I", 0) >= 0)
         {
             // Look for a two word "you __ me" pattern or 
             // "I __ you" transform statement 
@@ -337,14 +361,21 @@ public class Magpie4
                 int psn4 = findKeyword(statement, "want to", 0);
                 response = "Would you really like to " + statement.substring(findKeyword(statement, "want to", psn4 + 7)); //Context Based Response #19
             }
-            else if (stringContainsItemFromList(statement, fromList) == true) { 
+            /*else if (stringContainsItemFromList(statement, fromList) == true) { 
                 response = transformStr(statement);
             }            
             else
             {
                 response = getRandomResponse();
-            }
-        }
+            }*/
+       }
+       else if (stringContainsItemFromList(statement, fromList) == true) { 
+           response = "Fun"; //transformStr(statement);
+       }   
+       else
+       {
+         response = getRandomResponse();
+       }
         return response;
     }
     
