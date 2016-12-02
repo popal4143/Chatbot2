@@ -1,12 +1,5 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all he/she needs to know. The comments should usually include at least:
-------------------------------------------------------------------------
-
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
-HOW TO START THIS PROJECT:
-AUTHORS:
-USER INSTRUCTIONS:
+PROJECT TITLE: FMP Mentor Chatbot
+PURPOSE OF PROJECT: To create a Chatbot for DHS Freshmen to use. It will answer common questions easily and quickly. 
+VERSION or DATE: 12/2/2016
+HOW TO START THIS PROJECT: Download all files, open BlueJ package, right clck MagpieRunner4, select void main(String[] args).
+AUTHORS: popal4143 and rgamboa067
