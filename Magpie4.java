@@ -44,7 +44,7 @@ public class Magpie4
     //fromList.add("You're");  toList.add("I'm");
     //fromList.add("you're");  toList.add("I'm");
    }
-   
+   //Code to see if a word is contained in a response 
    public static boolean stringContainsItemFromList(String inputString, ArrayList<String> items)
    {
     for(int i =0; i < items.size(); i++)
@@ -57,7 +57,7 @@ public class Magpie4
     return false;
    }
     
-    
+    //Sends certain responses to other converaation paths
     public String transformStr(String s){
         for (int i = 0; i <fromList.size(); i++){
             String f=fromList.get(i);
@@ -100,14 +100,7 @@ public class Magpie4
         {
             response = "Make sure to always wear your lanyard! If you do not wear it you may \nreceive a detention. If you lost it, you can order a new one at \nstudent activities.";
         }
-        /*else if (findKeyword(statement, "mother") >= 0
-                || findKeyword(statement, "father") >= 0
-                || findKeyword(statement, "sister") >= 0
-                || findKeyword(statement, "brother") >= 0)
-        {
-            response = "Tell me more about your family.";
-        } */
-
+       
         // Responses which require transformations
         else if (findKeyword(statement, "I want to", 0) >= 0)
         {
@@ -166,13 +159,6 @@ public class Magpie4
             else if (psn >= 0 && findKeyword(statement, "off campus", psn) >= 0) {
                 response = "No I will not take you off campus, that is against school rules.";
             }
-            /*else if (stringContainsItemFromList(statement, fromList) == true) { 
-                response = transformStr(statement);
-            }   
-            else
-            {
-                response = getRandomResponse();
-            }*/
         }
         //"Why" questions are here
         else if (findKeyword(statement, "Why", 0) >= 0)
@@ -188,14 +174,7 @@ public class Magpie4
                     && findKeyword(statement, "have FMP", psn) >= 0)
             {
                 response = "Here at Dublin High, we understand that your first year of High School \ncan be scary. That is why we created FMP to ease you \ninto your experience."; //Context Based Response #6
-            }
-            /*else if (stringContainsItemFromList(statement, fromList) == true) { 
-                response = transformStr(statement);
-            }   
-            else
-            {
-                response = getRandomResponse();
-            }*/
+            }         
         }
         else if (findKeyword(statement, "What", 0) >= 0)
         {
@@ -207,14 +186,7 @@ public class Magpie4
             }
             else if (psn >= 0 && findKeyword(statement, "best class", psn) >= 0) {
                 response = "AP Computer Science is the best class.";
-            }
-            /*else if (stringContainsItemFromList(statement, fromList) == true) { 
-                response = transformStr(statement);
-            }   
-            else
-            {
-                response = getRandomResponse();
-            }*/
+            }         
         }
         else if (findKeyword(statement, "My name", 0) >= 0)
         {
@@ -257,14 +229,7 @@ public class Magpie4
                     && findKeyword(statement, "class", psn) >= 0)
             {
                 response ="A map of the school can be found in your Student Planner. \nIf you don't know your what classroom your class is in, it can be \nfound online on the parent portal."; //Context Based Response #10
-            }
-            /*else if (stringContainsItemFromList(statement, fromList) == true) { 
-                response = transformStr(statement);
-            }   
-            else
-            {
-                response = getRandomResponse();
-            }*/
+            }            
         }
         //"How" questions are here
         else if (findKeyword(statement, "How", 0) >= 0) 
@@ -301,14 +266,7 @@ public class Magpie4
                     response = "Please visit this website for instructions on how to print: \n"
                     + "https://sites.google.com/a/dublinusd.org/the-dhs-hub/ \n"
                     + "You can also find out more about the Dublin High School HUB on this website.";
-                }
-                /*else if (stringContainsItemFromList(statement, fromList) == true) { 
-                 response = transformStr(statement);
-                }   
-                else 
-                {
-                    response = getRandomResponse();
-                }*/
+                }                
             }
             if (psn >= 0
                     && findKeyword(statement, "make friends", psn) >= 0)
@@ -463,10 +421,6 @@ public class Magpie4
         return "What makes you think that I " + restOfStatement + " you?";
     }
     
-    
-
-    
-    
     /**
      * Search for one word in phrase.  The search is not case sensitive.
      * This method will check that the given goal is not a substring of a longer string
@@ -524,8 +478,6 @@ public class Magpie4
         return findKeyword (statement, goal, 0);
     }
     
-
-
     /**
      * Pick a default response to use if nothing else fits.
      * @return a non-committal string
@@ -546,25 +498,7 @@ public class Magpie4
         randomResponse.add(7,"No Way!"); //Random Response #8
         randomResponse.add(8,"Huh? Try saying something else."); //Random Response #9
         randomResponse.add(9,"Hmm. I'm not sure what you mean. Perhaps a human mentor could answer you."); //Random Response #10
-        String response = "";
-        
-        /*if (whichResponse == 0) //Old way of generating random responses. We're using ArrayLists now. 
-        {
-            response = "Interesting, tell me more.";
-        }
-        else if (whichResponse == 1)
-        {
-            response = "Hmmm.";
-        }
-        else if (whichResponse == 2)
-        {
-            response = "Do you really think so?";
-        }
-        else if (whichResponse == 3)
-        {
-            response = "You don't say.";
-        }*/
-
+        String response = "";        
         return randomResponse.get(whichResponse);
     }
 
