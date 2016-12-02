@@ -59,27 +59,122 @@ public class Magpie4
         {
             response = transformIWantStatement(statement);
         }
-        
-        else if (findKeyword(statement, "When", 0) >= 0)
+        else if (findKeyword(statement, "Hi", 0) >= 0)
         {
-            int psn = findKeyword(statement, "When", 0);
+            response = "Hi";
+        }
+        else if (findKeyword(statement, "Hello", 0) >= 0)
+        {
+            response = "Hi";
+        }
+        //any questions that start with "should" are here
+        else if (findKeyword(statement, "Should", 0) >= 0)
+        {
+            int psn = findKeyword(statement, "Should", 0);
             
             if (psn >= 0
-                    && findKeyword(statement, "drive", psn) >= 0)
+                    && findKeyword(statement, "AP", psn) >= 0)
             {
-                response = transformYouMeStatement(statement);
+                response = "Be careful, AP classes are very difficult. Only take the class if it’s really something you love to do."+
+                "I would recommend that you visit this website for more information on what classes to take:" +
+                "http:www.studypoint.com/ed/ap-classes/";
             }
             else if (psn >= 0
-                    && findKeyword(statement, "driving", psn) >= 0)
+                    && findKeyword(statement, "sport", psn) >= 0)
             {
-                response = transformISomethingYouStatement(statement);
+                response ="Yes. Sports are great ways to make "+
+                "friends and learn more about yourself. Remember "+
+                "though, sports take a lot of time and " +
+                "dedication so make sure you are serious about it.";
+            }
+            else
+            {
+                response = getRandomResponse();
             }
         }
-   
+        //Questions with "could" are here
+        else if (findKeyword(statement, "Could", 0) >= 0)
+        {
+            int psn = findKeyword(statement, "Could", 0);
+            if (psn >= 0
+                    && findKeyword(statement, "Homework", psn) >= 0)
+            {
+                response = "Please visit the HUB and ask a tutor. They’re always available and glad to help. ";
+            }
+            
+            else
+            {
+                response = getRandomResponse();
+            }
+        }
+        //"Why" questions are here
+        else if (findKeyword(statement, "Why", 0) >= 0)
+        {
+            int psn = findKeyword(statement, "Why", 0);
+            if (psn >= 0
+                    && findKeyword(statement, "off-campus", psn) >= 0)
+            {
+                response = "The school would like you to succeed in your first year in high school without distractions." +
+                "That’s why DHS created the Freshman Mentor Program to help you in your first magical year of high school!";
+            }
+            else if (psn >= 0
+                    && findKeyword(statement, "have FMP", psn) >= 0)
+            {
+                response = "Here at Dublin High, we understand that your first year of High School can be scary. That is why we created FMP to ease you into you experience.";
+            }
+            else
+            {
+                response = getRandomResponse();
+            }
+        }
+        else if (findKeyword(statement, "What", 0) >= 0)
+        {
+            int psn = findKeyword(statement, "What", 0);
+            if (psn >= 0
+                    && findKeyword(statement, "name", psn) >= 0)
+            {
+                response = "My name is Justin Symmank";
+            }
+            else
+            {
+                response = getRandomResponse();
+            }
+        }
+        //"Where questions are here
+        else if (findKeyword(statement, "Where", 0) >= 0)
+        {
+            int psn = findKeyword(statement, "Where", 0);
+            if (psn >= 0
+                    && findKeyword(statement, "taco-truck", psn) >= 0)
+            {
+                response = "You are not allowed to go there";
+            }
+            else if (psn >= 0
+                    && findKeyword(statement, "lockers", psn) >= 0)
+            {
+                response ="Here at Dublin High, we do not have traditional lockers. There are, however, PE lockers located in the Old Gym";
+            }
+            else if (psn >= 0
+                    && findKeyword(statement, "building", psn) >= 0)
+            {
+                response ="A map of the school can be found in your Student Planner";
+            }
+             else if (psn >= 0
+                    && findKeyword(statement, "lanyard", psn) >= 0)
+            {
+                response ="Make sure to always wear your lanyard! If you do not wear it you may receive a detention. If you lost it, you can order a new one at student activities. ";
+            }
+            else
+            {
+                response = getRandomResponse();
+            }
+        }
+        //"How" questions are here
         else if (findKeyword(statement, "How", 0) >= 0) //finish responses for these and make sure works
         {
             int psn = findKeyword(statement, "How", 0);
             int psn2 = findKeyword(statement, "Where", 0);
+            int psn3 = findKeyword(statement, "find", 0);
             if (psn >= 0
                     && findKeyword(statement, "print", psn) >= 0)
             {
@@ -115,8 +210,32 @@ public class Magpie4
                     response = getRandomResponse();
                 }
             }
+            if (psn >= 0
+                    && findKeyword(statement, "make friends", psn) >= 0)
+            {
+                response = "Get out there! Join clubs, join a sport, participate in student activities. Find people that have similar interests as you and just hang out with them.";         
+            }
+            if (psn >= 0
+                    && findKeyword(statement, "college", psn) >= 0)
+            {
+                response = "You're a freshman, stop worrying about college and have fun while you can";         
+            }
+            if (psn >= 0
+                    && findKeyword(statement, "driving", psn) >= 0)
+            {
+                response = "You can take your permit test at fifteen and a half. After that, you need to wait six months and take three behind the wheel lessons to take your driving lesson. But remember, all upperclassmen hate lowerclassmen that can drive.";         
+            }
+            if (psn >= 0
+                    && findKeyword(statement, "drive", psn) >= 0)
+            {
+                response = "You can take your permit test at fifteen and a half. After that, you need to wait six months and take three behind the wheel lessons to take your driving lesson. But remember, all upperclassmen hate lowerclassmen that can drive.";         
+            }
+            if (psn3>=0 && findKeyword(statement, "activities", psn) >= 0)
+            {
+                response = "Activities are announced during the morning announcements and the Video Bulletin. Make sure to pay attention so you don’t miss anything.";
+            }
         }
-        
+       //"I __ you" transform statement 
         else
         {
             // Look for a two word (you <something> me)
