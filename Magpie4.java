@@ -146,6 +146,9 @@ public class Magpie4
                 "though, sports take a lot of time and \n" +
                 "dedication so make sure you are serious about it.";
             }
+            else if (stringContainsItemFromList(statement, fromList) == true) { 
+                response = transformStr(statement);
+            }   
             else
             {
                 response = getRandomResponse();
@@ -160,7 +163,9 @@ public class Magpie4
             {
                 response = "Please visit the HUB and ask a tutor. They’re always available \nand glad to help. "; //Context Based Response #4
             }
-            
+            else if (stringContainsItemFromList(statement, fromList) == true) { 
+                response = transformStr(statement);
+            }   
             else
             {
                 response = getRandomResponse();
@@ -181,6 +186,9 @@ public class Magpie4
             {
                 response = "Here at Dublin High, we understand that your first year of High School \ncan be scary. That is why we created FMP to ease you \ninto your experience."; //Context Based Response #6
             }
+            else if (stringContainsItemFromList(statement, fromList) == true) { 
+                response = transformStr(statement);
+            }   
             else
             {
                 response = getRandomResponse();
@@ -194,6 +202,9 @@ public class Magpie4
             {
                 response = "My name is Justin Symmank"; //Context Based Response #7
             }
+            else if (stringContainsItemFromList(statement, fromList) == true) { 
+                response = transformStr(statement);
+            }   
             else
             {
                 response = getRandomResponse();
@@ -223,6 +234,9 @@ public class Magpie4
             {
                 response ="Make sure to always wear your lanyard! If you do not wear \nit you may receive a detention. If you lost it, you can order a \nnew one at student activities. "; //Context Based Response #11
             }
+            else if (stringContainsItemFromList(statement, fromList) == true) { 
+                response = transformStr(statement);
+            }   
             else
             {
                 response = getRandomResponse();
@@ -264,6 +278,9 @@ public class Magpie4
                     + "https://sites.google.com/a/dublinusd.org/the-dhs-hub/ \n"
                     + "You can also find out more about the Dublin High School HUB on this website.";
                 }
+                else if (stringContainsItemFromList(statement, fromList) == true) { 
+                response = transformStr(statement);
+                }   
                 else 
                 {
                     response = getRandomResponse();
@@ -320,7 +337,7 @@ public class Magpie4
                 int psn4 = findKeyword(statement, "want to", 0);
                 response = "Would you really like to " + statement.substring(findKeyword(statement, "want to", psn4 + 7)); //Context Based Response #19
             }
-            else if (stringContainsItemFromList(statement, fromList) == true) { //working on this right now that's why it probably won't compile. Comment this out to check if your stuff works. 
+            else if (stringContainsItemFromList(statement, fromList) == true) { 
                 response = transformStr(statement);
             }            
             else
