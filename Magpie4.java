@@ -14,6 +14,50 @@ import java.util.ArrayList;
  */
 public class Magpie4
 {
+    //Initializing to and from lists. If any of these 
+    //strings appear in a user's response or question, the
+    //string will be replaced with its appropriate reciprocal. 
+    ArrayList<String> fromList = new ArrayList<String>(); 
+    ArrayList<String> toList = new ArrayList<String>();
+    public Magpie4(){
+    fromList.add("Can I"); toList.add("What if you do not");
+    fromList.add("My");  toList.add("Your"); 
+    fromList.add("Are");  toList.add("Am");
+    fromList.add("are");  toList.add("am");
+    fromList.add("Am");  toList.add("Are");
+    fromList.add("am");  toList.add("are");
+    fromList.add("Were");  toList.add("Was");
+    fromList.add("were");  toList.add("was");
+    fromList.add("Was");  toList.add("Were");
+    fromList.add("was");  toList.add("Were");
+    fromList.add("I");  toList.add("YOU");
+    fromList.add("You");  toList.add("I");
+    fromList.add("you");  toList.add("I");
+    fromList.add("Your");  toList.add("My");
+    fromList.add("your");  toList.add("my");
+    fromList.add("My");  toList.add("Your");
+    fromList.add("my");  toList.add("your");
+    fromList.add("I've");  toList.add("YOU have");
+    fromList.add("You've");  toList.add("I've");
+    fromList.add("you've");  toList.add("I've");
+    fromList.add("I'm");  toList.add("YOU are");
+    fromList.add("You're");  toList.add("I'm");
+    fromList.add("you're");  toList.add("I'm");
+   }
+    
+    
+    public String transformStr(String s){
+        for (int i = 0; i <fromList.size(); i++){
+            String f=fromList.get(i);
+            String t=toList.get(i);
+    
+            if (s.indexOf(fromList.get(i))>=0){
+                s=s.replaceAll(fromList.get(i),toList.get(i));
+            }
+        }
+        return s;
+    }
+        
     /**
      * Get a default greeting   
      * @return a greeting
@@ -34,6 +78,7 @@ public class Magpie4
     public String getResponse(String statement) //Context Based Responses
     {
         String response = "";
+        
         if (statement.length() == 0)
         {
             response = "Say something, please.";
@@ -248,16 +293,25 @@ public class Magpie4
             if (psn >= 0
                     && findKeyword(statement, "me", psn) >= 0)
             {
-                response = transformYouMeStatement(statement);
+                response = transformYouMeStatement(statement); //Context Based Response #17 hullo
             }
             else if (psn2 >= 0
                     && findKeyword(statement, "you", psn2) >= 0)
             {
-                response = transformISomethingYouStatement(statement);
+                response = transformISomethingYouStatement(statement); //Context Based Response #18
             }
             else if (findKeyword(statement, "want", psn2) >= 0) {
-                response = "Be careful what you wish for. Would you really like that?";
+                int psn3 = findKeyword(statement, "want", 0);
+                response = "Would you really be happy if you had " + statement.substring(findKeyword(statement, "want", psn3 + 4)); //Context Based Response #19
             }
+            else if (findKeyword(statement, "want to", psn2) >= 0) {
+                int psn4 = findKeyword(statement, "want to", 0);
+                response = "Would you really like to " + statement.substring(findKeyword(statement, "want to", psn4 + 7)); //Context Based Response #19
+            }
+            else if () { //working on this right now that's why it probably won't compile. Comment this out to check if your stuff works. 
+                int psn4 = findKeyword(statement, "want to", 0);
+                response = "Would you really like to " + statement.substring(findKeyword(statement, "want to", psn4 + 7)); //Context Based Response #19
+            }            
             else
             {
                 response = getRandomResponse();
