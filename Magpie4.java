@@ -103,7 +103,11 @@ public class Magpie4
             {
                 response = "Please visit the HUB and ask a tutor. They’re always available \nand glad to help. "; //Context Based Response #4
             }
-            
+            else if (psn >= 0
+                    && findKeyword(statement, "Off-Campus", psn) >= 0)
+            {
+                response = "No I will not take you off-campus, that is against school rules."; //Context Based Response #4
+            }
             else
             {
                 response = getRandomResponse();
@@ -137,10 +141,27 @@ public class Magpie4
             {
                 response = "My name is Justin Symmank"; //Context Based Response #7
             }
+            else if (psn >= 0
+                    && findKeyword(statement, "best class", psn) >= 0)
+            {
+                response = "AP Computer Science is the best class."; //Context Based Response #7
+            }
             else
             {
                 response = getRandomResponse();
             }
+        else if (findKeyword(statement, "My name", 0) >= 0)
+        {
+            int psn = findKeyword(statement, "my name", 0);
+            if (psn >= 0
+                    && findKeyword(statement, "name", psn) >= 0)
+            {
+                response = "Thats a nice name, I'll try to remember it. My name is Justin Symmank";
+            }
+            else
+            {
+                response = getRandomResponse();
+            }    
         }
         //"Where questions are here
         else if (findKeyword(statement, "Where", 0) >= 0)
@@ -157,9 +178,19 @@ public class Magpie4
                 response ="Here at Dublin High, we do not have traditional lockers. \nThere are, however, PE lockers located in the Old Gym."; //Context Based Response #9
             }
             else if (psn >= 0
+                    && findKeyword(statement, "cafeteria", psn) >= 0)
+            {
+                response ="At Dublin High, we call the cafeteria the Student Union. It is in the center of campus."; //Context Based Response #9
+            }
+            else if (psn >= 0
                     && findKeyword(statement, "building", psn) >= 0)
             {
                 response ="A map of the school can be found in your Student Planner."; //Context Based Response #10
+            }
+             else if (psn >= 0
+                    && findKeyword(statement, "class", psn) >= 0)
+            {
+                response ="A map of the school can be found in your Student Planner. If you dont know your what classroom your class is in it can be found online on parent portal"; //Context Based Response #10
             }
              else if (psn >= 0
                     && findKeyword(statement, "lanyard", psn) >= 0)
