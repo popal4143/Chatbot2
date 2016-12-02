@@ -7,6 +7,17 @@ import java.util.Scanner;
  */
 public class MagpieRunner4
 {
+    public static void SimulateHuman(String s) {
+        for (int i=0;i<s.length();i++){
+            System.out.print(s.substring(i,i+1));
+            try {
+                Thread.sleep(80);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+       }
+       System.out.println("");
+    }
 
 	/**
 	 * Create a Magpie, give it user input, and print its replies.
@@ -19,9 +30,10 @@ public class MagpieRunner4
 		Scanner in = new Scanner (System.in);
 		String statement = in.nextLine();
 		
-		while (!statement.equals("Bye"))
+		while (!statement.equals("Bye") || !statement.equals("Goodbye"))
 		{
-			System.out.println (maggie.getResponse(statement));
+		    String response = maggie.getResponse(statement);
+			SimulateHuman(response);
 			statement = in.nextLine();
 		}
 	}

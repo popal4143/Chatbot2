@@ -18,8 +18,8 @@ public class Magpie4
      */ 
     public String getGreeting()
     {
-        return "Hello, let's talk. I am your FMP Mentor. Ask me questions and I'll do my best to answer!"
-        + "So, what's your name?"; //Find a way to get their name. Then say "Hello (name)".
+        return "Hello, let's talk. I am your FMP Mentor. \nAsk me questions and I'll do my best to answer!"
+        + " So, what's your name?"; //Find a way to get their name. Then say "Hello (name)".
     }
     
     /**
@@ -39,7 +39,7 @@ public class Magpie4
 
         else if (findKeyword(statement, "lanyard") >= 0)
         {
-            response = "Make sure to always wear your lanyard! If you do not wear it you may receive a detention. If you lost it, you can order a new one at student activities.";
+            response = "Make sure to always wear your lanyard! If you do not wear it you may \nreceive a detention. If you lost it, you can order a new one at \nstudent activities.";
         }
         /*else if (findKeyword(statement, "mother") >= 0
                 || findKeyword(statement, "father") >= 0
@@ -76,7 +76,7 @@ public class Magpie4
                     && findKeyword(statement, "AP", psn) >= 0)
             {
                 response = "Be careful, AP classes are very difficult. Only take the class if it’s really something you love to do."+
-                "I would recommend that you visit this website for more information on what classes to take:" +
+                " I would recommend that you visit this website for more information on what classes to take: " +
                 "http:www.studypoint.com/ed/ap-classes/";
             }
             else if (psn >= 0
