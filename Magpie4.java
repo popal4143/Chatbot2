@@ -20,16 +20,16 @@ public class Magpie4
     ArrayList<String> fromList = new ArrayList<String>(); 
     ArrayList<String> toList = new ArrayList<String>();
     public Magpie4(){
-    fromList.add("Can I"); toList.add("What if you do not");
-    fromList.add("My");  toList.add("Your"); 
-    fromList.add("Are");  toList.add("Am");
+    //fromList.add("Can I"); toList.add("What if you do not"); // Chatbot replaces this with "What if you do not"
+    fromList.add("My");  toList.add("Your");                   // but then replaces "you" with "I". Possible 
+    fromList.add("Are");  toList.add("Am");                    // future improvement for chatbot to differentiate.
     fromList.add("are");  toList.add("am");
     fromList.add("Am");  toList.add("Are");
     fromList.add("am");  toList.add("are");
     fromList.add("Were");  toList.add("Was");
     fromList.add("were");  toList.add("was");
-    fromList.add("Was");  toList.add("Were");
-    fromList.add("was");  toList.add("Were");
+    fromList.add("Was");  toList.add("WERE");
+    fromList.add("was");  toList.add("WERE");
     fromList.add("I");  toList.add("YOU");
     fromList.add("You");  toList.add("I");
     fromList.add("you");  toList.add("I");
@@ -37,12 +37,24 @@ public class Magpie4
     fromList.add("your");  toList.add("my");
     fromList.add("My");  toList.add("Your");
     fromList.add("my");  toList.add("your");
-    fromList.add("I've");  toList.add("YOU have");
-    fromList.add("You've");  toList.add("I've");
-    fromList.add("you've");  toList.add("I've");
-    fromList.add("I'm");  toList.add("YOU are");
-    fromList.add("You're");  toList.add("I'm");
-    fromList.add("you're");  toList.add("I'm");
+    //fromList.add("I've");  toList.add("YOU have"); //These do not work because chatbot first sees
+    //fromList.add("You've");  toList.add("I've");   //the "I" or "You" than the "I'm" or "You've".
+    //fromList.add("you've");  toList.add("I've");   // Possible future improvement for chatbot to
+    //fromList.add("I'm");  toList.add("YOU are");   // differentiate between these.
+    //fromList.add("You're");  toList.add("I'm");
+    //fromList.add("you're");  toList.add("I'm");
+   }
+   
+   public static boolean stringContainsItemFromList(String inputString, ArrayList<String> items)
+   {
+    for(int i =0; i < items.size(); i++)
+    {
+        if(inputString.contains(items.get(i)))
+        {
+            return true;
+        }
+    }
+    return false;
    }
     
     
@@ -308,9 +320,8 @@ public class Magpie4
                 int psn4 = findKeyword(statement, "want to", 0);
                 response = "Would you really like to " + statement.substring(findKeyword(statement, "want to", psn4 + 7)); //Context Based Response #19
             }
-            else if () { //working on this right now that's why it probably won't compile. Comment this out to check if your stuff works. 
-                int psn4 = findKeyword(statement, "want to", 0);
-                response = "Would you really like to " + statement.substring(findKeyword(statement, "want to", psn4 + 7)); //Context Based Response #19
+            else if (stringContainsItemFromList(statement, fromList) == true) { //working on this right now that's why it probably won't compile. Comment this out to check if your stuff works. 
+                response = transformStr(statement);
             }            
             else
             {
