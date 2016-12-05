@@ -418,7 +418,7 @@ public class Magpie4
     private String transformYouMeStatement(String statement)
     {
         //  Remove the final period, if there is one
-        statement = statement.trim();
+        statement = statement.trim(); // Word Boundary (one example)
         String lastChar = statement.substring(statement
                 .length() - 1);
         if (lastChar.equals("."))
