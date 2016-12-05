@@ -33,18 +33,22 @@ public class Magpie4
     fromList.add("I");  toList.add("YOU");
     fromList.add("You");  toList.add("I");
     fromList.add("you");  toList.add("I");
-    fromList.add("Your");  toList.add("My");
-    fromList.add("your");  toList.add("my");
+    //fromList.add("Your");  toList.add("My"); // See below comment. "These do not work because..."
+    //fromList.add("your");  toList.add("my");
     fromList.add("My");  toList.add("Your");
     fromList.add("my");  toList.add("your");
     //fromList.add("I've");  toList.add("YOU have"); //These do not work because chatbot first sees
-    //fromList.add("You've");  toList.add("I've");   //the "I" or "You" than the "I'm" or "You've".
+    //fromList.add("You've");  toList.add("I've");   //the "I" or "You" then the "I'm" or "You've".
     //fromList.add("you've");  toList.add("I've");   // Possible future improvement for chatbot to
     //fromList.add("I'm");  toList.add("YOU are");   // differentiate between these.
     //fromList.add("You're");  toList.add("I'm");
     //fromList.add("you're");  toList.add("I'm");
    }
    //Code to see if a word is contained in a response 
+   /**
+     * Checks if statement contains an item in fromList
+     * @return true or false
+     */ 
    public static boolean stringContainsItemFromList(String inputString, ArrayList<String> items)
    {
     for(int i =0; i < items.size(); i++)
@@ -57,14 +61,19 @@ public class Magpie4
     return false;
    }
     
-    //Sends certain responses to other converaation paths
+    //Sends certain responses to other conversation paths
+    /**
+     * If a pronoun is detected, switch it with its complementary pronoun  
+     * @return transposed pronoun
+     */ 
     public String transformStr(String s){
         for (int i = 0; i <fromList.size(); i++){
             String f=fromList.get(i);
             String t=toList.get(i);
     
-            if (s.indexOf(fromList.get(i))>=0){
+            if ( s.substring(0, s.indexOf(fromList.get(i))).indexOf(fromList.get(i) )>=0){
                 s=s.replaceAll(fromList.get(i),toList.get(i));
+                
             }
         }
         return s;
@@ -93,16 +102,16 @@ public class Magpie4
         
         if (statement.length() == 0)
         {
-            response = "Say something, please.";
+            response = "Say something, please."; // Context Based Response #23 // Null Input
         }
 
-        else if (findKeyword(statement, "lanyard") >= 0) //Context Based Response #1
+        else if (findKeyword(statement, "lanyard") >= 0) 
         {
-            response = "Make sure to always wear your lanyard! If you do not wear it you may \nreceive a detention. If you lost it, you can order a new one at \nstudent activities.";
+            response = "Make sure to always wear your lanyard! If you do not wear it you may \nreceive a detention. If you lost it, you can order a new one at \nstudent activities."; // Context Based Response #1
         }
        
         // Responses which require transformations
-        else if (findKeyword(statement, "I want to", 0) >= 0)
+        else if (findKeyword(statement, "I want to", 0) >= 0) // Context Based Response #25 (below)
         {
             response = transformIWantToStatement(statement);
         }
@@ -113,11 +122,15 @@ public class Magpie4
         }
         else if (findKeyword(statement, "Hi", 0) >= 0)
         {
-            response = "Hi";
+            response = "Hello";
         }
         else if (findKeyword(statement, "Hello", 0) >= 0)
         {
             response = "Hi";
+        }
+        else if (findKeyword(statement, "Hey", 0) >= 0)
+        {
+            response = "Hey buddy.";
         }
         //any questions that start with "should" are here
         else if (findKeyword(statement, "Should", 0) >= 0) 
@@ -157,7 +170,7 @@ public class Magpie4
                 response = "Please visit the HUB and ask a tutor. They’re always available \nand glad to help. "; //Context Based Response #4
             }
             else if (psn >= 0 && findKeyword(statement, "off campus", psn) >= 0) {
-                response = "No I will not take you off campus, that is against school rules.";
+                response = "No I will not take you off campus, that is against school rules."; // Context Based Response #22
             }
         }
         //"Why" questions are here
@@ -182,10 +195,10 @@ public class Magpie4
             if (psn >= 0
                     && findKeyword(statement, "name", psn) >= 0)
             {
-                response = "My name is Justin Symmank"; //Context Based Response #7
+                response = "My name is Justin Symmank"; // Context Based Response #7
             }
             else if (psn >= 0 && findKeyword(statement, "best class", psn) >= 0) {
-                response = "AP Computer Science is the best class.";
+                response = "AP Computer Science is the best class."; // Context Based Response #21
             }         
         }
         else if (findKeyword(statement, "My name", 0) >= 0)
@@ -193,10 +206,10 @@ public class Magpie4
             int psn = findKeyword(statement, "my name", 0);
             if (psn >= 0)
             {
-                response = "That's a nice name, I'll try to remember it. My name is Justin Symmank.";
+                response = "That's a nice name, I'll try to remember it. My name is Justin Symmank."; // Context Based Response #20
             }
         }
-        //"Where questions are here
+        //"Where" questions are here
         else if (findKeyword(statement, "Where", 0) >= 0)
         {
             int psn = findKeyword(statement, "Where", 0);
@@ -304,20 +317,20 @@ public class Magpie4
             if (psn >= 0
                     && findKeyword(statement, "me", psn) >= 0)
             {
-                response = transformYouMeStatement(statement); //Context Based Response #17 hullo
+                response = transformYouMeStatement(statement); //Context Based Response #17 // Transposition
             }
             else if (psn2 >= 0
                     && findKeyword(statement, "you", psn2) >= 0)
             {
-                response = transformISomethingYouStatement(statement); //Context Based Response #18
+                response = transformISomethingYouStatement(statement); //Context Based Response #18 // Transposition
             }
             else if (findKeyword(statement, "want", psn2) >= 0) {
                 int psn3 = findKeyword(statement, "want", 0);
-                response = "Would you really be happy if you had " + statement.substring(findKeyword(statement, "want", psn3 + 4)); //Context Based Response #19
+                response = "Would you really be happy if you had " + statement.substring(findKeyword(statement, "want", psn3 + 4)); //Context Based Response #19 // Transposition
             }
             else if (findKeyword(statement, "want to", psn2) >= 0) {
                 int psn4 = findKeyword(statement, "want to", 0);
-                response = "Would you really like to " + statement.substring(findKeyword(statement, "want to", psn4 + 7)); //Context Based Response #19
+                response = "Would you really like to " + statement.substring(findKeyword(statement, "want to", psn4 + 7)); //Context Based Response #24 // Transposition
             }
             /*else if (stringContainsItemFromList(statement, fromList) == true) { 
                 response = transformStr(statement);
@@ -328,7 +341,7 @@ public class Magpie4
             }*/
        }
        else if (stringContainsItemFromList(statement, fromList) == true) { 
-           response = "Fun"; //transformStr(statement);
+           response = "Fun"; //transformStr(statement); // Transposition
        }   
        else
        {
@@ -498,7 +511,7 @@ public class Magpie4
         randomResponse.add(7,"No Way!"); //Random Response #8
         randomResponse.add(8,"Huh? Try saying something else."); //Random Response #9
         randomResponse.add(9,"Hmm. I'm not sure what you mean. Perhaps a human mentor could answer you."); //Random Response #10
-        String response = "";        
+        //String response = "";        
         return randomResponse.get(whichResponse);
     }
 
